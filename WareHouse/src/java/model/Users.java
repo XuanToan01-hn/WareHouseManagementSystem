@@ -13,7 +13,7 @@ public class Users {
     private String image;
     private boolean male; // SQL BIT maps to boolean
     private Date dateOfBirth;
-    private Role roleID;
+    private Role role;
     private int locationID;
 
 
@@ -31,7 +31,7 @@ public class Users {
         this.image = image;
         this.male = male;
         this.dateOfBirth = dateOfBirth;
-        this.roleID = roleID;
+        this.role = roleID;
         this.locationID = locationID;
     }
 
@@ -46,7 +46,7 @@ public class Users {
         this.image = image;
         this.male = male;
         this.dateOfBirth = dateOfBirth;
-        this.roleID = roleID;
+        this.role = roleID;
         this.locationID = locationID;
     }
     
@@ -134,13 +134,15 @@ public class Users {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Role getRoleID() {
-        return roleID;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleID(Role roleID) {
-        this.roleID = roleID;
+    public void setRole(Role role) {
+        this.role = role;
     }
+
+
 
 
     public int getLocationID() {

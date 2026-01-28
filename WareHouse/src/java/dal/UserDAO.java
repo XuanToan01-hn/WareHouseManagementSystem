@@ -26,10 +26,10 @@ public class UserDAO extends DBContext {
     }
 
     // 2. Login method (Check username and password)
-    public Users login(String user, String pass) {
-        String sql = "SELECT * FROM Users WHERE username = ? AND password = ?";
+    public Users login(String email, String pass) {
+        String sql = "select * from Users u where u.Email= ? and u.Password = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, user);
+            ps.setString(1, email);
             ps.setString(2, pass);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -55,7 +55,7 @@ public class UserDAO extends DBContext {
         ps.setBoolean(8, u.isMale());
         ps.setDate(9, u.getDateOfBirth());
         // Lấy ID từ đối tượng Role
-        ps.setInt(10, u.getRoleID().getRoleID()); 
+        ps.setInt(10, u.getRole().getRoleID()); 
         ps.setInt(11, u.getLocationID());
         return ps.executeUpdate() > 0;
     } catch (SQLException e) {
@@ -75,7 +75,7 @@ public class UserDAO extends DBContext {
             ps.setString(4, u.getImage());
             ps.setBoolean(5, u.isMale());
             ps.setDate(6, u.getDateOfBirth());
-            ps.setInt(7, u.getRoleID().getRoleID()
+            ps.setInt(7, u.getRole().getRoleID()
             );
             ps.setInt(8, u.getLocationID());
             ps.setInt(9, u.getUserID());
