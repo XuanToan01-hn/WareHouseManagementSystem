@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class SalesOrderDetail {
     private int salesOrderDetailID;
     private int salesOrderID;
-    private int productID;
+    private int productDetailID;
     private int quantity;
     private BigDecimal price;
     private int taxID;
@@ -14,10 +14,10 @@ public class SalesOrderDetail {
     public SalesOrderDetail() {
     }
 
-    public SalesOrderDetail(int salesOrderDetailID, int salesOrderID, int productID, int quantity, BigDecimal price, int taxID, BigDecimal subTotal) {
+    public SalesOrderDetail(int salesOrderDetailID, int salesOrderID, int productDetailID, int quantity, BigDecimal price, int taxID, BigDecimal subTotal) {
         this.salesOrderDetailID = salesOrderDetailID;
         this.salesOrderID = salesOrderID;
-        this.productID = productID;
+        this.productDetailID = productDetailID;
         this.quantity = quantity;
         this.price = price;
         this.taxID = taxID;
@@ -40,12 +40,12 @@ public class SalesOrderDetail {
         this.salesOrderID = salesOrderID;
     }
 
-    public int getProductID() {
-        return productID;
+    public int getProductDetailID() {
+        return productDetailID;
     }
 
-    public void setProductID(int productID) {
-        this.productID = productID;
+    public void setProductDetailID(int productDetailID) {
+        this.productDetailID = productDetailID;
     }
 
     public int getQuantity() {

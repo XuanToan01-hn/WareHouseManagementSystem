@@ -5,15 +5,13 @@ public class LocationProduct {
     private int productID;
     private int productDetailID;
     private int quantity;
-    private int minStock;
     private Integer maxStock; // Nullable
 
-    public LocationProduct(int locationID, int productID, int productDetailID, int quantity, int minStock, Integer maxStock) {
+    public LocationProduct(int locationID, int productID, int productDetailID, int quantity, Integer maxStock) {
         this.locationID = locationID;
         this.productID = productID;
         this.productDetailID = productDetailID;
         this.quantity = quantity;
-        this.minStock = minStock;
         this.maxStock = maxStock;
     }
 
@@ -50,14 +48,6 @@ public class LocationProduct {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public int getMinStock() {
-        return minStock;
-    }
-
-    public void setMinStock(int minStock) {
-        this.minStock = minStock;
     }
 
     public Integer getMaxStock() {

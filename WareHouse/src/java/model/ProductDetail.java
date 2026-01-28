@@ -7,21 +7,19 @@ public class ProductDetail {
     private int productID;
     private String lotNumber;
     private String serialNumber;
+    private String color;
     private Date manufactureDate;
-    private Date expiryDate;
-    private String quality;
 
     public ProductDetail() {
     }
 
-    public ProductDetail(int productDetailID, int productID, String lotNumber, String serialNumber, Date manufactureDate, Date expiryDate, String quality) {
+    public ProductDetail(int productDetailID, int productID, String lotNumber, String serialNumber, String color, Date manufactureDate) {
         this.productDetailID = productDetailID;
         this.productID = productID;
         this.lotNumber = lotNumber;
         this.serialNumber = serialNumber;
+        this.color = color;
         this.manufactureDate = manufactureDate;
-        this.expiryDate = expiryDate;
-        this.quality = quality;
     }
 
     public int getProductDetailID() {
@@ -56,27 +54,19 @@ public class ProductDetail {
         this.serialNumber = serialNumber;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     public Date getManufactureDate() {
         return manufactureDate;
     }
 
     public void setManufactureDate(Date manufactureDate) {
         this.manufactureDate = manufactureDate;
-    }
-
-    public Date getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(Date expiryDate) {
-        this.expiryDate = expiryDate;
-    }
-
-    public String getQuality() {
-        return quality;
-    }
-
-    public void setQuality(String quality) {
-        this.quality = quality;
     }
 }
