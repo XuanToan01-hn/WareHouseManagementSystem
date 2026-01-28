@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Users;
+import model.User;
 
 /**
  *
@@ -60,17 +60,17 @@ public class HomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Users u = (Users) session.getAttribute("user");
+        User u = (User) session.getAttribute("user");
         if (u.getRole().getRoleID() == 1) {
-            response.sendRedirect("userlist");
+            response.sendRedirect("admin");
         } else if (u.getRole().getRoleID() == 2) {
-            response.sendRedirect("list-sales-order");
+            response.sendRedirect("manager");
         } else if (u.getRole().getRoleID() == 3) {
-            response.sendRedirect("purchase-orders");
+            response.sendRedirect("warehouse-staff");
         } else if (u.getRole().getRoleID() == 4) {
-            response.sendRedirect("inventory-report-staff");
+            response.sendRedirect("sale");
         } else if (u.getRole().getRoleID() == 5) {
-            response.sendRedirect("dash-board");
+            response.sendRedirect("purchase");
         }
     }
 

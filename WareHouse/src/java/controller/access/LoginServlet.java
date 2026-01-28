@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Users;
+import model.User;
 import utils.EndCode;
 import utils.InputValidator;
 
@@ -96,7 +96,7 @@ public class LoginServlet extends HttpServlet {
 
         UserDAO userService = new UserDAO();
 //        String passwordEncode = EndCode.toSHA1(passwordStr);
-        Users user = userService.login(emailStr, passwordStr);
+        User user = userService.login(emailStr, passwordStr);
 
         if (user != null) {
             // Login successful -> Save to session

@@ -6,13 +6,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Role;
-import model.Users;
+import model.User;
 
 public class UserDAO extends DBContext {
 
     // 1. Get all users
-    public List<Users> getAllUsers() {
-        List<Users> list = new ArrayList<>();
+    public List<User> getAllUsers() {
+        List<User> list = new ArrayList<>();
         String sql = "SELECT * FROM Users";
         try (PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
@@ -26,7 +26,7 @@ public class UserDAO extends DBContext {
     }
 
     // 2. Login method (Check username and password)
-    public Users login(String email, String pass) {
+    public User login(String email, String pass) {
         String sql = "select * from Users u where u.Email= ? and u.Password = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, email);
@@ -41,7 +41,7 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-    public boolean insertUser(Users u) {
+    public boolean insertUser(User u) {
     String sql = "INSERT INTO Users (userCode, fullName, username, password, email, phone, image, male, dateOfBirth, roleID, locationID) "
                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -65,7 +65,7 @@ public class UserDAO extends DBContext {
 }
 
     // 4. Update User
-    public boolean updateUser(Users u) {
+    public boolean updateUser(User u) {
         String sql = "UPDATE Users SET fullName=?, email=?, phone=?, image=?, male=?, dateOfBirth=?, roleID=?, locationID=? "
                    + "WHERE userID=?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -99,10 +99,10 @@ public class UserDAO extends DBContext {
     }
 
     // Helper method to reduce code duplication
-    private Users mapResultSetToUser(ResultSet rs) throws SQLException {
+    private User mapResultSetToUser(ResultSet rs) throws SQLException {
         Role role = new Role();
     role.setRoleID(rs.getInt("roleID"));
-        return new Users(
+        return new User(
             rs.getInt("userID"),
             rs.getString("userCode"),
             rs.getString("fullName"),
@@ -127,7 +127,7 @@ public class UserDAO extends DBContext {
 
     if (adminRole != null) {
         // 2. Truyền đối tượng adminRole (kiểu Role) vào constructor
-        Users admin = new Users(
+        User admin = new User(
             "ADM001", "System Admin", "admin", "123", 
             "admin@gmail.com", "0912345678", "avatar.png", 
             true, java.sql.Date.valueOf("2000-01-01"), 

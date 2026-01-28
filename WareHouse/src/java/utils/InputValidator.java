@@ -4,7 +4,7 @@ import dal.UserDAO;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
-import model.Users;
+import model.User;
 
 public class InputValidator {
 

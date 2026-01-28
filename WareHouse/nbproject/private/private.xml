@@ -3,15 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/src/java/utils/EndCode.java</file>
             <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/src/java/dal/UserDAO.java</file>
             <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/src/java/controller/access/LoginServlet.java</file>
-            <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/src/java/controller/RoleServlet.java</file>
-            <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/src/java/controller/home/HomeServlet.java</file>
-            <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/src/java/utils/LocationValidation.java</file>
-            <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/src/java/model/Users.java</file>
-            <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/src/java/utils/InputValidator.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/src/java/utils/ValidateSupplier.java</file>
             <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/src/java/dal/DBContext.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/src/java/utils/ValidateCustomer.java</file>
             <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/web/view/auth-sign-in.jsp</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/src/java/controller/RoleServlet.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/src/java/model/User.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/src/java/controller/home/HomeServlet.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/src/java/model/GoodIssue.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/src/java/dal/LocationDAO.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/src/java/utils/LocationValidation.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Desktop/SWP-WH/WareHouseManagementSystem/WareHouse/src/java/utils/InputValidator.java</file>
         </group>
     </open-files>
 </project-private>
