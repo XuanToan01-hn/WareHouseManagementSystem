@@ -91,7 +91,56 @@ public class LocationDAO extends DBContext {
         return false;
     }
 
+    /**
+     * Check if location has child locations (used as ParentLocationID).
+     */
+    public boolean hasChildren(int locationId) {
+        String sql = "SELECT COUNT(*) FROM [Location] WHERE ParentLocationID = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, locationId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * Check if location can be deleted (no children, not referenced by Users, Location_Product, etc.).
+     */
+    public boolean canDelete(int locationId) {
+        if (hasChildren(locationId)) {
+            return false;
+        }
+        String[] tables = {"Users", "Location_Product", "Goods_Receipt", "Goods_Issue",
+            "Transfer_Order", "Transfer_Order", "Check_Inventory"};
+        String[] columns = {"LocationID", "LocationID", "LocationID", "LocationID",
+            "FromLocationID", "ToLocationID", "LocationID"};
+        for (int i = 0; i < tables.length; i++) {
+            String sql = "SELECT COUNT(*) FROM [" + tables[i] + "] WHERE " + columns[i] + " = ?";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, locationId);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next() && rs.getInt(1) > 0) {
+                        return false;
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return true;
+    }
+
     public boolean delete(int id) {
+        if (!canDelete(id)) {
+            return false;
+        }
         String sql = "DELETE FROM [Location] WHERE LocationID = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id);
