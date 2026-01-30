@@ -27,7 +27,7 @@ public class UserDAO extends DBContext {
 
     // 2. Login method (Check username and password)
     public Users login(String user, String pass) {
-        String sql = "SELECT * FROM Users WHERE username = ? AND password = ?";
+        String sql = "SELECT * FROM Users WHERE Email = ? AND Password = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, user);
             ps.setString(2, pass);

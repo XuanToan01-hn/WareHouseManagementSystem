@@ -9,77 +9,139 @@ import model.Category;
 
 public class CategoryDAO extends DBContext {
 
-    public List<Category> getAll() {
+ public List<Category> getAll() {
+        String sql = "SELECT * FROM Category;";
         List<Category> list = new ArrayList<>();
-        String sql = "SELECT CategoryID, Name, Description FROM Category";
-        try (PreparedStatement ps = connection.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(map(rs));
+                Category c = new Category(rs.getInt("CategoryID"), rs.getString("Name"), rs.getString("Description"));
+                list.add(c);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+
+            System.out.println(ex);
         }
         return list;
     }
 
-    public Category getById(int id) {
-        String sql = "SELECT CategoryID, Name, Description FROM Category WHERE CategoryID = ?";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setInt(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return map(rs);
-                }
+    public Category getByID(int iD) {
+        String sql = "SELECT * FROM Category WHERE CategoryID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, iD); // Gán giá trị iD vào dấu ?
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Category(
+                        rs.getInt("CategoryID"),
+                        rs.getString("Name"),
+                        rs.getString("Description")
+                );
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            System.out.println(ex);
         }
         return null;
     }
 
-    public boolean insert(Category c) {
-        String sql = "INSERT INTO Category (Name, Description) VALUES (?, ?)";
+
+    public Integer getCategoryIdByProductId(int productId) {
+        String sql = "SELECT CategoryID FROM Product WHERE ProductID = ?";
+
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, c.getName());
-            ps.setString(2, c.getDescription());
-            return ps.executeUpdate() > 0;
+
+            ps.setInt(1, productId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("CategoryID");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+
+        return null; // Trả về null nếu không tìm thấy hoặc lỗi
     }
 
-    public boolean update(Category c) {
-        String sql = "UPDATE Category SET Name = ?, Description = ? WHERE CategoryID = ?";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, c.getName());
-            ps.setString(2, c.getDescription());
-            ps.setInt(3, c.getCategoryID());
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
+    
+    public List<Category> searchAndPaginate(String keyword, int offset, int limit) {
+        String sql = "SELECT * FROM Category WHERE Name LIKE ? ORDER BY CategoryID OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        List<Category> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + keyword + "%");
+            ps.setInt(2, offset);
+            ps.setInt(3, limit);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Category c = new Category(rs.getInt("CategoryID"), rs.getString("Name"), rs.getString("Description"));
+                list.add(c);
+            }
+        } catch (SQLException ex) {
+            System.out.println("getAll with search + paging: " + ex);
         }
-        return false;
+        return list;
     }
 
-    public boolean delete(int id) {
+    public int count(String keyword) {
+        String sql = "SELECT COUNT(*) FROM Category WHERE Name LIKE ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + keyword + "%");
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println("count with search: " + ex);
+        }
+        return 0;
+    }
+
+    public void delete(int id) {
         String sql = "DELETE FROM Category WHERE CategoryID = ?";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("delete: " + ex);
         }
-        return false;
     }
 
-    private Category map(ResultSet rs) throws SQLException {
-        Category c = new Category();
-        c.setCategoryID(rs.getInt("CategoryID"));
-        c.setName(rs.getString("Name"));
-        c.setDescription(rs.getString("Description"));
-        return c;
+    public void insert(Category category) {
+        String sql = "INSERT INTO Category ([Name], [Description]) VALUES (?, ?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, category.getName());
+            ps.setString(2, category.getDescription());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("insert: " + ex);
+        }
     }
+
+    public void update(Category category) {
+        String sql = "UPDATE Category SET [Name] = ?, [Description] = ? WHERE CategoryID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, category.getName());
+            ps.setString(2, category.getDescription());
+            ps.setInt(3, category.getCategoryID());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("update: " + ex);
+        }
+    }
+
+    public static void main(String[] args) {
+        CategoryDAO dao = new CategoryDAO();
+        List<Category> list = dao.searchAndPaginate("", 0, 5);
+        for (Category c : list) {
+            System.out.println(c.getCategoryID()+ " - " + c.getName());
+        }
+    }
+
 }
 

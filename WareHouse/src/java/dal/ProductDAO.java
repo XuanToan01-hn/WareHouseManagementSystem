@@ -13,8 +13,7 @@ public class ProductDAO extends DBContext {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT ProductID, Code, Name, Price, Description, Image, UnitID, CategoryID, MinStock FROM Product";
 
-        try (PreparedStatement st = connection.prepareStatement(sql);
-             ResultSet rs = st.executeQuery()) {
+        try (PreparedStatement st = connection.prepareStatement(sql); ResultSet rs = st.executeQuery()) {
 
             while (rs.next()) {
                 Product p = new Product();
@@ -60,7 +59,6 @@ public class ProductDAO extends DBContext {
         }
         return null;
     }
-
 
     public void insertProduct(Product p) {
         String sql = "INSERT INTO Product (Code, Name, Price, Description, Image, UnitID, CategoryID, MinStock) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -123,6 +121,107 @@ public class ProductDAO extends DBContext {
         }
     }
 
+    public List<Product> getFilteredProducts(String search, String sortPrice, String categoryId, String unitId, int page, int pageSize) {
+        List<Product> list = new ArrayList<>();
+
+        StringBuilder sql = new StringBuilder("SELECT * FROM Product WHERE 1=1");
+        List<Object> params = new ArrayList<>();
+
+        // Search
+        if (search != null && !search.trim().isEmpty()) {
+            sql.append(" AND (Name LIKE ? OR Code LIKE ?)");
+            params.add("%" + search + "%");
+            params.add("%" + search + "%");
+        }
+
+        // Category
+        if (categoryId != null && !categoryId.isEmpty()) {
+            sql.append(" AND CategoryID = ?");
+            params.add(Integer.parseInt(categoryId));
+        }
+
+        // Unit
+        if (unitId != null && !unitId.isEmpty()) {
+            sql.append(" AND UnitID = ?");
+            params.add(Integer.parseInt(unitId));
+        }
+
+        // Sort
+        sql.append(" ORDER BY ");
+        if (sortPrice != null && !sortPrice.isEmpty()) {
+            sql.append("Price ").append(sortPrice.equalsIgnoreCase("asc") ? "ASC" : "DESC");
+        } else {
+            sql.append("ProductID ASC");
+        }
+
+        // Pagination (SQL Server)
+        sql.append(" OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+        params.add((page - 1) * pageSize);
+        params.add(pageSize);
+
+        try (PreparedStatement ps = connection.prepareStatement(sql.toString())) {
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(
+                        rs.getInt("ProductID"),
+                        rs.getString("Code"),
+                        rs.getString("Name"),
+                        rs.getBigDecimal("Price"),
+                        rs.getString("Description"),
+                        rs.getString("Image"),
+                        rs.getInt("UnitID"),
+                        rs.getInt("CategoryID"),
+                        rs.getInt("MinStock")
+                );
+                list.add(p);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public int getTotalFilteredProducts(String search, String categoryId, String unitId) {
+        StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM Product WHERE 1=1");
+        List<Object> params = new ArrayList<>();
+
+        if (search != null && !search.trim().isEmpty()) {
+            sql.append(" AND (Name LIKE ? OR Code LIKE ?)");
+            params.add("%" + search + "%");
+            params.add("%" + search + "%");
+        }
+
+        if (categoryId != null && !categoryId.isEmpty()) {
+            sql.append(" AND CategoryID = ?");
+            params.add(Integer.parseInt(categoryId));
+        }
+
+        if (unitId != null && !unitId.isEmpty()) {
+            sql.append(" AND UnitID = ?");
+            params.add(Integer.parseInt(unitId));
+        }
+
+        try (PreparedStatement ps = connection.prepareStatement(sql.toString())) {
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
@@ -136,7 +235,7 @@ public class ProductDAO extends DBContext {
         }
 
         // 2. Test Insert
-        /*
+        
         System.out.println("--- TEST INSERT ---");
         Product newP = new Product();
         newP.setCode("P0099");
@@ -146,8 +245,7 @@ public class ProductDAO extends DBContext {
         newP.setCategoryID(1); // Giả sử CategoryID 1 đã tồn tại
         newP.setMinStock(10);
         dao.insertProduct(newP);
-        */
-
+         
         // 3. Test Update
         /*
         System.out.println("--- TEST UPDATE ---");
@@ -156,12 +254,11 @@ public class ProductDAO extends DBContext {
             pToUpdate.setName("Updated Name");
             dao.updateProduct(pToUpdate);
         }
-        */
-
+         */
         // 4. Test Delete
         /*
         System.out.println("--- TEST DELETE ---");
         dao.deleteProduct(99); // ID giả định
-        */
+         */
     }
 }
