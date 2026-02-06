@@ -1,0 +1,55 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="SWPVerA:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/SWPVerA_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="SWPVerA" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/lib/jakarta.servlet.jsp.jstl-2.0.0.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/jakarta.servlet.jsp.jstl-api-2.0.0.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/jaxb-api-2.1.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/sqljdbc42.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/el-api.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/jasper.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/jsp-api.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/catalina.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/ecj-4.27.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/jasper-el.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/jaspic-api.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/tomcat-api.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/tomcat-jni.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/catalina-ha.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/servlet-api.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/tomcat-dbcp.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/tomcat-jdbc.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/tomcat-util.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/catalina-ant.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/catalina-ssi.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/tomcat-coyote.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/websocket-api.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/tomcat-i18n-cs.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/tomcat-i18n-de.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/tomcat-i18n-es.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/tomcat-i18n-fr.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/tomcat-i18n-ja.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/tomcat-i18n-ko.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/tomcat-i18n-ru.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/annotations-api.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/catalina-tribes.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/tomcat-util-scan.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/tomcat-websocket.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/tomcat-coyote-ffm.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/tomcat-i18n-pt-BR.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/tomcat-i18n-zh-CN.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/catalina-storeconfig.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/websocket-client-api.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../apachetomcat/apache-tomcat-10.1.44/lib/jakartaee-migration-1.0.9-shaded.jar" />
+          <element id="library" level="project" name="jakarta.servlet.jsp.jstl-2.0.0" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="SWPVerA/web/Web" />
+    </root>
+  </artifact>
+</component>

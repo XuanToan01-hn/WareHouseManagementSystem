@@ -1,0 +1,14 @@
+# NetBeans build
+/WareHouse/build/
+/WareHouse/dist/
+
+# NetBeans private
+/WareHouse/nbproject/private/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
